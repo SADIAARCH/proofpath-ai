@@ -209,6 +209,7 @@ with st.sidebar:
         "<div class='sidebar-brand-copy'>Evidence before confidence.</div></div>",
         unsafe_allow_html=True,
     )
+    theme = st.radio("Appearance", ["Day", "Night"], horizontal=True)
     source = st.radio("Input", ["Demo case", "My own files"])
     strategy = st.selectbox(
         "Decision brain",
@@ -219,6 +220,54 @@ with st.sidebar:
         st.caption("Decider 2B routes the next check; Bedrock explains findings.")
     elif strategy == "Amazon Bedrock (Nova)":
         st.caption("Bedrock routes the next check; Python tools own the verdict.")
+
+if theme == "Night":
+    st.markdown(
+        """
+        <style>
+        :root {
+            --ink: #e8f4f8; --muted: #a6bdc8; --line: rgba(114, 201, 236, .24);
+            --blue: #80d9f5; --sky: #58c5eb; --panel: rgba(17, 39, 53, .78);
+        }
+        .stApp {
+            background:
+                radial-gradient(circle at 8% 4%, rgba(255, 213, 78, .16), transparent 26rem),
+                radial-gradient(circle at 92% 18%, rgba(74, 190, 232, .18), transparent 25rem),
+                linear-gradient(135deg, #071923 0%, #0d2634 52%, #102b38 100%);
+            background-size: 140% 140%;
+            animation: night-drift 18s ease-in-out infinite alternate;
+        }
+        @keyframes night-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+        .hero {
+            background: linear-gradient(110deg, rgba(53, 72, 40, .88), rgba(13, 64, 87, .92));
+            border-color: rgba(114, 201, 236, .22);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, .28);
+        }
+        .hero-title, .claim-value, .step-title, .verdict-value, h1, h2, h3 { color: var(--ink); }
+        .hero-text, .step-summary { color: #c0d3da; }
+        .hero-mark { color: #ffe477; background: rgba(8, 31, 43, .68); border-color: rgba(255, 228, 119, .22); }
+        .hero-kicker, .flow-kicker, .sidebar-brand-title, .verdict-label { color: #80d9f5; }
+        .pill, .flow-item, [data-testid="stMetric"] {
+            color: #bcecf8; background: rgba(8, 31, 43, .62);
+            border-color: rgba(114, 201, 236, .22);
+        }
+        .flow-title { color: var(--ink); }
+        .flow-copy, .claim-label, .section-label, .step-why { color: #a6bdc8; }
+        .claim-panel, .step-card {
+            background: rgba(14, 42, 56, .74); border-color: rgba(114, 201, 236, .18);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+        }
+        .step-card { border-left-color: #58c5eb; }
+        .verdict {
+            background: linear-gradient(135deg, rgba(58, 65, 37, .9), rgba(12, 62, 82, .92));
+            border-color: rgba(128, 217, 245, .35) !important;
+        }
+        [data-testid="stSidebar"] { background: rgba(6, 24, 34, .92); border-right-color: rgba(114, 201, 236, .18); }
+        .sidebar-brand { background: linear-gradient(135deg, rgba(65, 66, 34, .9), rgba(11, 62, 84, .94)); border-color: rgba(114, 201, 236, .22); }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 if source == "Demo case":
     if not metas:
