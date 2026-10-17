@@ -15,10 +15,12 @@ Agent Experience Hackathon.
 
 ## Wiring
 
-[`StrandsDecider`](./proofpath/decider.py) calls the official
+[[`StrandsDecider`](./proofpath/decider.py) calls the official
 `strands-decider ask` CLI and parses its choice. [`run_agent`](./proofpath/agent.py)
 then executes the selected Python tool. The tools calculate evidence and the
 agent computes the verdict; Decider 2B cannot invent evidence or a verdict.
+[`StrandsBedrockDecider`](./proofpath/decider.py) pairs that routing decision
+with a Bedrock Nova explanation shown in the UI.
 
 ```python
 decider = StrandsDecider()

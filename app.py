@@ -6,7 +6,8 @@ from pathlib import Path
 import streamlit as st
 
 from proofpath import (AdaptiveDecider, BedrockDecider, Claim, FixedOrderDecider,
-                       ModelDecider, StrandsDecider, run_agent)
+                       ModelDecider, StrandsBedrockDecider, StrandsDecider,
+                       run_agent)
 from proofpath.tools import TOOLS
 
 st.set_page_config(page_title="ProofPath AI", page_icon="🔎", layout="wide")
@@ -69,7 +70,7 @@ else:
 
 if st.button("Investigate", type="primary"):
     decider = {
-        "Strands Decider 2B + Bedrock": StrandsDecider,
+        "Strands Decider 2B + Bedrock": StrandsBedrockDecider,
         "Amazon Bedrock (Nova)": BedrockDecider,
         "Adaptive (heuristic)": AdaptiveDecider,
         "Fixed checklist": FixedOrderDecider,

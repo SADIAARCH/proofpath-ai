@@ -196,6 +196,26 @@ class StrandsDecider(Decider):
         return action, "Strands Decider answer invalid, heuristic used: " + why
 
 
+class StrandsBedrockDecider(Decider):
+    """Pair Decider 2B tool routing with a Bedrock explanation call."""
+    name = "Strands Decider 2B + Bedrock"
+
+    def __init__(self, strands=None, bedrock=None):
+        self.strands = strands or StrandsDecider()
+        self.bedrock = bedrock or BedrockDecider()
+
+    def choose(self, state):
+        action, rationale = self.strands.choose(state)
+        try:
+            explanation = self.bedrock.explain(
+                f"Explain in one short sentence why '{action}' is the next "
+                f"evidence check for this state:\n{ModelDecider.build_prompt(state)}"
+            )
+            return action, f"{rationale}. Bedrock: {explanation}"
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            return action, f"{rationale}. Bedrock explanation unavailable ({type(exc).__name__})"
+
+
 class BedrockDecider(Decider):
     """Use an Amazon Bedrock foundation model to choose the next check.
 
@@ -234,6 +254,23 @@ class BedrockDecider(Decider):
         )
         content = response.get("output", {}).get("message", {}).get("content", [])
         return " ".join(str(part.get("text", "")) for part in content).strip()
+
+    def explain(self, prompt: str) -> str:
+        runtime = __import__("boto3").client(
+            "bedrock-runtime",
+            region_name=os.environ.get("AWS_REGION", "us-east-1"),
+        )
+        response = runtime.converse(
+            modelId=self.model_id,
+            system=[{"text": "Answer concisely and do not invent evidence."}],
+            messages=[{"role": "user", "content": [{"text": prompt}]}],
+            inferenceConfig={"temperature": 0, "maxTokens": 60},
+        )
+        content = response.get("output", {}).get("message", {}).get("content", [])
+        text = " ".join(str(part.get("text", "")) for part in content).strip()
+        if not text:
+            raise ValueError("Bedrock returned an empty explanation")
+        return text
 
     def choose(self, state):
         try:
