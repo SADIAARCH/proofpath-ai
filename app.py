@@ -40,6 +40,33 @@ st.markdown(
         letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem;
     }
     .subtitle { color: var(--muted); font-size: 1.08rem; margin-bottom: 1.8rem; }
+    .hero {
+        display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+        padding: 1.7rem 1.8rem; border-radius: 24px; margin: .4rem 0 1.5rem;
+        background: linear-gradient(110deg, rgba(255, 247, 194, .92), rgba(214, 244, 255, .94));
+        border: 1px solid rgba(255, 255, 255, .95);
+        box-shadow: 0 18px 42px rgba(31, 87, 112, .10);
+    }
+    .hero-copy { flex: 1; }
+    .hero-mark {
+        width: 82px; height: 82px; flex: 0 0 82px; display: grid; place-items: center;
+        border-radius: 24px; color: #12668d; font-size: 2.35rem; font-weight: 800;
+        background: rgba(255, 255, 255, .70);
+        border: 1px solid rgba(255, 255, 255, .9);
+        box-shadow: inset 0 -8px 18px rgba(114, 201, 236, .22);
+    }
+    .hero-kicker {
+        color: #12668d; font-size: .72rem; font-weight: 800;
+        letter-spacing: .14em; text-transform: uppercase;
+    }
+    .hero-title { color: var(--ink); font-size: 1.75rem; font-weight: 800; margin: .3rem 0; }
+    .hero-text { color: #526275; line-height: 1.5; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    .pill {
+        color: #12668d; background: rgba(255, 255, 255, .62);
+        border: 1px solid rgba(22, 130, 181, .16); border-radius: 999px;
+        padding: .34rem .7rem; font-size: .75rem; font-weight: 700;
+    }
     .claim-panel {
         background: var(--panel); border: 1px solid rgba(255, 255, 255, .9);
         border-radius: 20px; padding: 1.35rem 1.5rem; margin: 1.1rem 0 1.7rem;
@@ -64,6 +91,7 @@ st.markdown(
         border-left: 4px solid var(--sky);
     }
     .step-title { color: var(--ink); font-weight: 700; font-size: 1rem; }
+    .step-number { color: #1682b5; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .step-summary { color: #3e4b5f; margin-top: .35rem; }
     .step-why { color: var(--muted); font-size: .85rem; margin-top: .6rem; }
     .verdict {
@@ -110,17 +138,26 @@ VERDICT = {"supported": ("#16a34a", "SUPPORTED"),
 
 def step_card(icon, title, summary, rationale):
     st.markdown(
-        f"<div class='step-card'><div class='step-title'>{icon} {title}</div>"
+        f"<div class='step-card'><div class='step-number'>Evidence check</div>"
+        f"<div class='step-title'>{icon} {title}</div>"
         f"<div class='step-summary'>{summary}</div>"
         f"<div class='step-why'>Decision rationale: {rationale}</div></div>",
         unsafe_allow_html=True,
     )
 
 
-st.markdown("<div class='eyebrow'>ProofPath / evidence review system</div>", unsafe_allow_html=True)
-st.title("ProofPath AI")
 st.markdown(
-    "<div class='subtitle'>A transparent review agent for machine-learning performance claims.</div>",
+    "<div class='hero'><div class='hero-copy'><div class='hero-kicker'>"
+    "ProofPath / evidence review system</div><div class='hero-title'>"
+    "ProofPath AI</div><div class='hero-text'>A calm, transparent way to "
+    "investigate machine-learning performance claims before you trust them.</div>"
+    "<div class='pill-row'><span class='pill'>Evidence-first</span>"
+    "<span class='pill'>Decider 2B routing</span><span class='pill'>Bedrock-ready</span>"
+    "</div></div><div class='hero-mark'>◈</div></div>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    "<div class='subtitle'>Choose a case, select the decision brain, and follow the evidence trail.</div>",
     unsafe_allow_html=True,
 )
 
