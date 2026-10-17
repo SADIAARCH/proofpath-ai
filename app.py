@@ -71,6 +71,13 @@ st.markdown(
     }
     .hero-title { color: var(--ink); font-size: 1.75rem; font-weight: 800; margin: .3rem 0; }
     .hero-text { color: #526275; line-height: 1.5; }
+    .mode-badge {
+        display: inline-flex; align-items: center; gap: .4rem; margin-top: .85rem;
+        color: #5532c9; background: #f1edff; border: 1px solid #d9ceff;
+        border-radius: 999px; padding: .34rem .72rem; font-size: .7rem;
+        font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .mode-badge-dot { width: .46rem; height: .46rem; border-radius: 50%; background: #8f6bff; }
     .pill-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
     .pill {
         color: #5532c9; background: rgba(255, 255, 255, .68);
@@ -282,6 +289,8 @@ if theme == "Night":
         }
         .hero-title, .claim-value, .step-title, .verdict-value, h1, h2, h3 { color: var(--ink); }
         .hero-text, .step-summary { color: #c0d3da; }
+        .mode-badge { color: #d9ceff; background: rgba(91, 63, 209, .22); border-color: rgba(193, 169, 255, .35); }
+        .mode-badge-dot { background: #c1a9ff; box-shadow: 0 0 10px #9b7cff; }
         .hero-mark { color: #c1a9ff; background: rgba(16, 17, 49, .72); border-color: rgba(193, 169, 255, .24); }
         .hero-mark::before, .hero-mark::after { border-color: rgba(155, 124, 255, .38); }
         .hero-kicker, .flow-kicker, .sidebar-brand-title, .verdict-label { color: #c1a9ff; }
@@ -310,6 +319,12 @@ if theme == "Night":
         """,
         unsafe_allow_html=True,
     )
+
+mode_label = "Night mode · observatory active" if theme == "Night" else "Day mode · review workspace active"
+st.markdown(
+    f"<div class='mode-badge'><span class='mode-badge-dot'></span>{mode_label}</div>",
+    unsafe_allow_html=True,
+)
 
 if source == "Demo case":
     if not metas:
