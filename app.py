@@ -104,6 +104,18 @@ st.markdown(
         box-shadow: 0 0 0 4px rgba(140, 100, 255, .16); animation: signal-blink 1.6s ease-in-out infinite;
     }
     @keyframes signal-blink { 50% { opacity: .35; transform: scale(.78); } }
+    .workspace-card {
+        min-height: 180px; padding: 1.25rem; border-radius: 18px;
+        background: rgba(255, 255, 255, .72); border: 1px solid rgba(255, 255, 255, .92);
+        box-shadow: 0 10px 26px rgba(54, 45, 118, .07);
+    }
+    .workspace-card h3 { margin: 0 0 .8rem; font-size: 1rem; letter-spacing: -.02em; }
+    .workspace-label {
+        color: #667085; font-size: .68rem; font-weight: 800;
+        letter-spacing: .1em; text-transform: uppercase; margin-top: .8rem;
+    }
+    .workspace-value { color: #242044; font-size: .95rem; font-weight: 750; margin-top: .2rem; }
+    .workspace-note { color: #667085; font-size: .8rem; line-height: 1.45; margin-top: .8rem; }
     .sidebar-brand {
         padding: .75rem .8rem; margin-bottom: 1rem; border-radius: 14px;
         background: linear-gradient(135deg, #eee8ff, #d9f5ff);
@@ -279,6 +291,9 @@ if theme == "Night":
         }
         .flow-title { color: var(--ink); }
         .flow-copy, .claim-label, .section-label, .step-why { color: #a6bdc8; }
+        .workspace-card { background: rgba(14, 19, 54, .78); border-color: rgba(155, 124, 255, .2); }
+        .workspace-label, .workspace-note { color: #a6bdc8; }
+        .workspace-value, .workspace-card h3 { color: #e8e9ff; }
         .signal { color: #bcecf8; background: rgba(8, 31, 43, .62); border-color: rgba(114, 201, 236, .22); }
         .claim-panel, .step-card {
             background: rgba(14, 42, 56, .74); border-color: rgba(114, 201, 236, .18);
@@ -302,11 +317,6 @@ if source == "Demo case":
         st.stop()
     name = st.sidebar.selectbox("Case", list(metas))
     claim = Claim.from_case(metas[name], Path(__file__).parent)
-    st.markdown(
-        f"<div class='claim-panel'><div class='claim-label'>Claim under review</div>"
-        f"<div class='claim-value'>{claim.text}</div></div>",
-        unsafe_allow_html=True,
-    )
 else:
     value = st.sidebar.slider("Claimed accuracy", 0.50, 1.00, 0.98, 0.001)
     up_preds = st.sidebar.file_uploader("Predictions CSV (features, y_true, y_pred)", type="csv")
@@ -321,6 +331,25 @@ else:
             Path(paths[key]).write_bytes(up.getvalue())
     claim = Claim(value=value, text=f"{value:.1%} accuracy", eval_notes=notes, paper_text=paper,
                   predictions_path=paths.get("preds"), train_path=paths.get("train"))
+
+setup_col, claim_col = st.columns([0.85, 1.55], gap="large")
+with setup_col:
+    st.markdown(
+        f"<div class='workspace-card'><h3>Review workspace</h3>"
+        f"<div class='workspace-label'>Input source</div>"
+        f"<div class='workspace-value'>{source}</div>"
+        f"<div class='workspace-label'>Decision brain</div>"
+        f"<div class='workspace-value'>{strategy}</div>"
+        f"<div class='workspace-note'>The router chooses the next evidence check. "
+        "Deterministic tools calculate the finding.</div></div>",
+        unsafe_allow_html=True,
+    )
+with claim_col:
+    st.markdown(
+        f"<div class='claim-panel' style='margin-top:0'><div class='claim-label'>"
+        f"Claim under review</div><div class='claim-value'>{claim.text}</div></div>",
+        unsafe_allow_html=True,
+    )
 
 st.markdown("<div class='section-label'>Review controls</div>", unsafe_allow_html=True)
 if st.button("Run evidence review", type="primary", use_container_width=True):
