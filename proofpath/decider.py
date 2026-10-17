@@ -9,6 +9,8 @@ import subprocess
 import urllib.request
 from dataclasses import dataclass
 
+from botocore.exceptions import BotoCoreError, ClientError
+
 from .tools import TOOLS, Context, Finding, OK
 
 
@@ -212,7 +214,7 @@ class StrandsBedrockDecider(Decider):
                 f"evidence check for this state:\n{ModelDecider.build_prompt(state)}"
             )
             return action, f"{rationale}. Bedrock: {explanation}"
-        except (OSError, ValueError, KeyError, TypeError) as exc:
+        except (OSError, ValueError, KeyError, TypeError, BotoCoreError, ClientError) as exc:
             return action, f"{rationale}. Bedrock explanation unavailable ({type(exc).__name__})"
 
 
