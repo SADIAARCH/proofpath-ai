@@ -67,6 +67,36 @@ st.markdown(
         border: 1px solid rgba(22, 130, 181, .16); border-radius: 999px;
         padding: .34rem .7rem; font-size: .75rem; font-weight: 700;
     }
+    .flow {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem;
+        margin: 0 0 1.7rem;
+    }
+    .flow-item {
+        position: relative; padding: .9rem 1rem; border-radius: 14px;
+        background: rgba(255, 255, 255, .66); border: 1px solid rgba(255, 255, 255, .9);
+        box-shadow: 0 7px 18px rgba(31, 87, 112, .05);
+    }
+    .flow-item:not(:last-child)::after {
+        content: "→"; position: absolute; right: -.62rem; top: .8rem;
+        color: #1682b5; font-size: 1.15rem; font-weight: 800; z-index: 2;
+    }
+    .flow-kicker { color: #1682b5; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .flow-title { color: var(--ink); font-size: .92rem; font-weight: 750; margin-top: .2rem; }
+    .flow-copy { color: var(--muted); font-size: .78rem; margin-top: .15rem; }
+    .sidebar-brand {
+        padding: .75rem .8rem; margin-bottom: 1rem; border-radius: 14px;
+        background: linear-gradient(135deg, #fff4bd, #d9f5ff);
+        border: 1px solid rgba(255, 255, 255, .9);
+    }
+    .sidebar-brand-title { color: #12668d; font-size: 1rem; font-weight: 800; }
+    .sidebar-brand-copy { color: #667085; font-size: .74rem; margin-top: .15rem; }
+    @media (max-width: 720px) {
+        h1 { font-size: 2.45rem !important; }
+        .hero { padding: 1.25rem; }
+        .hero-mark { width: 62px; height: 62px; flex-basis: 62px; font-size: 1.8rem; }
+        .flow { grid-template-columns: 1fr; }
+        .flow-item:not(:last-child)::after { content: "↓"; right: 1rem; top: auto; bottom: -.65rem; }
+    }
     .claim-panel {
         background: var(--panel); border: 1px solid rgba(255, 255, 255, .9);
         border-radius: 20px; padding: 1.35rem 1.5rem; margin: 1.1rem 0 1.7rem;
@@ -160,11 +190,25 @@ st.markdown(
     "<div class='subtitle'>Choose a case, select the decision brain, and follow the evidence trail.</div>",
     unsafe_allow_html=True,
 )
+st.markdown(
+    "<div class='flow'><div class='flow-item'><div class='flow-kicker'>01 · Context</div>"
+    "<div class='flow-title'>Bring a claim</div><div class='flow-copy'>A result and its supporting artifacts.</div></div>"
+    "<div class='flow-item'><div class='flow-kicker'>02 · Reason</div>"
+    "<div class='flow-title'>Choose the next check</div><div class='flow-copy'>Decider 2B routes the evidence review.</div></div>"
+    "<div class='flow-item'><div class='flow-kicker'>03 · Trust</div>"
+    "<div class='flow-title'>Get a verdict</div><div class='flow-copy'>Deterministic tools show why.</div></div></div>",
+    unsafe_allow_html=True,
+)
 
 cases_dir = Path(__file__).parent / "data" / "cases"
 metas = {p.parent.name: json.loads(p.read_text()) for p in sorted(cases_dir.glob("*/meta.json"))}
 
 with st.sidebar:
+    st.markdown(
+        "<div class='sidebar-brand'><div class='sidebar-brand-title'>◈ ProofPath AI</div>"
+        "<div class='sidebar-brand-copy'>Evidence before confidence.</div></div>",
+        unsafe_allow_html=True,
+    )
     source = st.radio("Input", ["Demo case", "My own files"])
     strategy = st.selectbox(
         "Decision brain",
