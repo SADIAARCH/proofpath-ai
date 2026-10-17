@@ -19,17 +19,17 @@ st.markdown(
         --ink: #172033;
         --muted: #667085;
         --line: rgba(91, 156, 190, .25);
-        --blue: #1682b5;
-        --sky: #72c9ec;
-        --yellow: #fff4bd;
+        --blue: #5b3fd1;
+        --sky: #9b7cff;
+        --yellow: #f0eaff;
         --panel: rgba(255, 255, 255, .84);
     }
     .stApp {
         color: var(--ink);
         background:
-            radial-gradient(circle at 8% 4%, rgba(255, 226, 103, .34), transparent 26rem),
-            radial-gradient(circle at 92% 18%, rgba(114, 201, 236, .32), transparent 25rem),
-            linear-gradient(135deg, #fffdf2 0%, #f4fbff 52%, #fff9d8 100%);
+            radial-gradient(circle at 8% 4%, rgba(155, 124, 255, .26), transparent 26rem),
+            radial-gradient(circle at 92% 18%, rgba(83, 198, 255, .24), transparent 25rem),
+            linear-gradient(135deg, #f8f6ff 0%, #f3f4ff 52%, #faf7ff 100%);
     }
     [data-testid="stHeader"] { background: transparent; }
     .block-container { max-width: 1180px; padding: 2.5rem 2rem 4rem; }
@@ -43,20 +43,20 @@ st.markdown(
     .hero {
         display: flex; align-items: center; justify-content: space-between; gap: 2rem;
         padding: 1.7rem 1.8rem; border-radius: 24px; margin: .4rem 0 1.5rem;
-        background: linear-gradient(110deg, rgba(255, 247, 194, .92), rgba(214, 244, 255, .94));
+        background: linear-gradient(110deg, rgba(235, 229, 255, .94), rgba(218, 242, 255, .94));
         border: 1px solid rgba(255, 255, 255, .95);
         box-shadow: 0 18px 42px rgba(31, 87, 112, .10);
     }
     .hero-copy { flex: 1; }
     .hero-mark {
         width: 112px; height: 112px; flex: 0 0 112px; display: grid; place-items: center;
-        position: relative; border-radius: 50%; color: #12668d; font-size: 2.35rem; font-weight: 800;
+        position: relative; border-radius: 50%; color: #5532c9; font-size: 2.35rem; font-weight: 800;
         background: rgba(255, 255, 255, .70);
         border: 1px solid rgba(255, 255, 255, .9);
-        box-shadow: inset 0 -8px 18px rgba(114, 201, 236, .22);
+        box-shadow: inset 0 -8px 18px rgba(155, 124, 255, .25);
     }
     .hero-mark::before, .hero-mark::after {
-        content: ""; position: absolute; border: 1px solid rgba(22, 130, 181, .32);
+        content: ""; position: absolute; border: 1px solid rgba(91, 63, 209, .32);
         border-radius: 50%; animation: radar-pulse 3s ease-out infinite;
     }
     .hero-mark::before { inset: -12px; }
@@ -66,15 +66,15 @@ st.markdown(
         75%, 100% { opacity: 0; transform: scale(1.14); }
     }
     .hero-kicker {
-        color: #12668d; font-size: .72rem; font-weight: 800;
+        color: #5532c9; font-size: .72rem; font-weight: 800;
         letter-spacing: .14em; text-transform: uppercase;
     }
     .hero-title { color: var(--ink); font-size: 1.75rem; font-weight: 800; margin: .3rem 0; }
     .hero-text { color: #526275; line-height: 1.5; }
     .pill-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
     .pill {
-        color: #12668d; background: rgba(255, 255, 255, .62);
-        border: 1px solid rgba(22, 130, 181, .16); border-radius: 999px;
+        color: #5532c9; background: rgba(255, 255, 255, .68);
+        border: 1px solid rgba(91, 63, 209, .18); border-radius: 999px;
         padding: .34rem .7rem; font-size: .75rem; font-weight: 700;
     }
     .flow {
@@ -88,9 +88,9 @@ st.markdown(
     }
     .flow-item:not(:last-child)::after {
         content: "→"; position: absolute; right: -.62rem; top: .8rem;
-        color: #1682b5; font-size: 1.15rem; font-weight: 800; z-index: 2;
+        color: #5b3fd1; font-size: 1.15rem; font-weight: 800; z-index: 2;
     }
-    .flow-kicker { color: #1682b5; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .flow-kicker { color: #5b3fd1; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
     .flow-title { color: var(--ink); font-size: .92rem; font-weight: 750; margin-top: .2rem; }
     .flow-copy { color: var(--muted); font-size: .78rem; margin-top: .15rem; }
     .signal {
@@ -100,16 +100,16 @@ st.markdown(
         letter-spacing: .06em; text-transform: uppercase;
     }
     .signal-dot {
-        width: .45rem; height: .45rem; border-radius: 50%; background: #f0b429;
-        box-shadow: 0 0 0 4px rgba(240, 180, 41, .14); animation: signal-blink 1.6s ease-in-out infinite;
+        width: .45rem; height: .45rem; border-radius: 50%; background: #8c64ff;
+        box-shadow: 0 0 0 4px rgba(140, 100, 255, .16); animation: signal-blink 1.6s ease-in-out infinite;
     }
     @keyframes signal-blink { 50% { opacity: .35; transform: scale(.78); } }
     .sidebar-brand {
         padding: .75rem .8rem; margin-bottom: 1rem; border-radius: 14px;
-        background: linear-gradient(135deg, #fff4bd, #d9f5ff);
+        background: linear-gradient(135deg, #eee8ff, #d9f5ff);
         border: 1px solid rgba(255, 255, 255, .9);
     }
-    .sidebar-brand-title { color: #12668d; font-size: 1rem; font-weight: 800; }
+    .sidebar-brand-title { color: #5532c9; font-size: 1rem; font-weight: 800; }
     .sidebar-brand-copy { color: #667085; font-size: .74rem; margin-top: .15rem; }
     @media (max-width: 720px) {
         h1 { font-size: 2.45rem !important; }
@@ -142,22 +142,22 @@ st.markdown(
         border-left: 4px solid var(--sky);
     }
     .step-title { color: var(--ink); font-weight: 700; font-size: 1rem; }
-    .step-number { color: #1682b5; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .step-number { color: #5b3fd1; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .step-summary { color: #3e4b5f; margin-top: .35rem; }
     .step-why { color: var(--muted); font-size: .85rem; margin-top: .6rem; }
     .verdict {
         border: 1px solid rgba(22, 130, 181, .28); border-radius: 18px;
-        padding: 1.4rem 1.5rem; background: linear-gradient(135deg, rgba(255, 249, 211, .94), rgba(225, 247, 255, .94));
+        padding: 1.4rem 1.5rem; background: linear-gradient(135deg, rgba(239, 234, 255, .96), rgba(222, 244, 255, .96));
         margin-top: 1.1rem; box-shadow: 0 12px 30px rgba(22, 130, 181, .10);
     }
     .verdict-label {
-        color: #12668d; font-size: .75rem; font-weight: 700;
+        color: #5532c9; font-size: .75rem; font-weight: 700;
         letter-spacing: .1em; text-transform: uppercase;
     }
     .verdict-value { color: #172033; font-size: 1.55rem; font-weight: 750; margin: .25rem 0; }
     .stButton > button {
         border: 0; border-radius: 12px; font-weight: 700; min-height: 2.9rem;
-        background: linear-gradient(135deg, #1682b5, #42afd6);
+        background: linear-gradient(135deg, #5532c9, #8f6bff);
         color: white;
         box-shadow: 0 8px 18px rgba(22, 130, 181, .20);
         transition: transform .15s ease, box-shadow .15s ease;
@@ -172,7 +172,7 @@ st.markdown(
         box-shadow: 0 8px 22px rgba(31, 87, 112, .06);
     }
     [data-testid="stSidebar"] {
-        background: rgba(255, 252, 226, .90);
+        background: rgba(244, 242, 255, .92);
         border-right: 1px solid rgba(148, 163, 184, .16);
     }
     </style>
@@ -252,27 +252,27 @@ if theme == "Night":
         <style>
         :root {
             --ink: #e8f4f8; --muted: #a6bdc8; --line: rgba(114, 201, 236, .24);
-            --blue: #80d9f5; --sky: #58c5eb; --panel: rgba(17, 39, 53, .78);
+            --blue: #c1a9ff; --sky: #9b7cff; --panel: rgba(17, 20, 48, .80);
         }
         .stApp {
             background:
-                radial-gradient(circle at 8% 4%, rgba(255, 213, 78, .16), transparent 26rem),
-                radial-gradient(circle at 92% 18%, rgba(74, 190, 232, .18), transparent 25rem),
-                linear-gradient(135deg, #071923 0%, #0d2634 52%, #102b38 100%);
+                radial-gradient(circle at 8% 4%, rgba(155, 124, 255, .18), transparent 26rem),
+                radial-gradient(circle at 92% 18%, rgba(83, 198, 255, .16), transparent 25rem),
+                linear-gradient(135deg, #090b22 0%, #12143b 52%, #171343 100%);
             background-size: 140% 140%;
             animation: night-drift 18s ease-in-out infinite alternate;
         }
         @keyframes night-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
         .hero {
-            background: linear-gradient(110deg, rgba(53, 72, 40, .88), rgba(13, 64, 87, .92));
+            background: linear-gradient(110deg, rgba(44, 34, 86, .92), rgba(13, 55, 87, .92));
             border-color: rgba(114, 201, 236, .22);
             box-shadow: 0 18px 42px rgba(0, 0, 0, .28);
         }
         .hero-title, .claim-value, .step-title, .verdict-value, h1, h2, h3 { color: var(--ink); }
         .hero-text, .step-summary { color: #c0d3da; }
-        .hero-mark { color: #ffe477; background: rgba(8, 31, 43, .68); border-color: rgba(255, 228, 119, .22); }
-        .hero-mark::before, .hero-mark::after { border-color: rgba(128, 217, 245, .35); }
-        .hero-kicker, .flow-kicker, .sidebar-brand-title, .verdict-label { color: #80d9f5; }
+        .hero-mark { color: #c1a9ff; background: rgba(16, 17, 49, .72); border-color: rgba(193, 169, 255, .24); }
+        .hero-mark::before, .hero-mark::after { border-color: rgba(155, 124, 255, .38); }
+        .hero-kicker, .flow-kicker, .sidebar-brand-title, .verdict-label { color: #c1a9ff; }
         .pill, .flow-item, [data-testid="stMetric"] {
             color: #bcecf8; background: rgba(8, 31, 43, .62);
             border-color: rgba(114, 201, 236, .22);
@@ -286,11 +286,11 @@ if theme == "Night":
         }
         .step-card { border-left-color: #58c5eb; }
         .verdict {
-            background: linear-gradient(135deg, rgba(58, 65, 37, .9), rgba(12, 62, 82, .92));
-            border-color: rgba(128, 217, 245, .35) !important;
+            background: linear-gradient(135deg, rgba(44, 34, 86, .92), rgba(12, 48, 82, .92));
+            border-color: rgba(155, 124, 255, .38) !important;
         }
         [data-testid="stSidebar"] { background: rgba(6, 24, 34, .92); border-right-color: rgba(114, 201, 236, .18); }
-        .sidebar-brand { background: linear-gradient(135deg, rgba(65, 66, 34, .9), rgba(11, 62, 84, .94)); border-color: rgba(114, 201, 236, .22); }
+        .sidebar-brand { background: linear-gradient(135deg, rgba(44, 34, 86, .94), rgba(11, 55, 84, .94)); border-color: rgba(155, 124, 255, .24); }
         </style>
         """,
         unsafe_allow_html=True,
