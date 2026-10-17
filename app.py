@@ -17,43 +17,56 @@ st.markdown(
     <style>
     :root {
         --ink: #172033;
-        --muted: #637083;
-        --line: #dce3ec;
-        --blue: #1d4ed8;
-        --panel: #f7f9fc;
+        --muted: #667085;
+        --line: rgba(148, 163, 184, .24);
+        --blue: #3158d8;
+        --violet: #7656d6;
+        --panel: rgba(255, 255, 255, .82);
     }
-    .stApp { background: #ffffff; color: var(--ink); }
-    [data-testid="stHeader"] { background: #ffffff; }
-    .block-container { max-width: 1180px; padding-top: 2rem; }
-    h1, h2, h3 { color: var(--ink); letter-spacing: -0.02em; }
+    .stApp {
+        color: var(--ink);
+        background:
+            radial-gradient(circle at 8% 4%, rgba(119, 92, 214, .16), transparent 26rem),
+            radial-gradient(circle at 92% 18%, rgba(49, 88, 216, .13), transparent 25rem),
+            linear-gradient(135deg, #f8faff 0%, #f5f7fc 52%, #fbf9ff 100%);
+    }
+    [data-testid="stHeader"] { background: transparent; }
+    .block-container { max-width: 1180px; padding: 2.5rem 2rem 4rem; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: -0.04em; }
+    h1 { font-size: 3.2rem !important; line-height: 1.02 !important; }
     .eyebrow {
-        color: var(--blue); font-size: .78rem; font-weight: 700;
-        letter-spacing: .12em; text-transform: uppercase; margin-bottom: .35rem;
+        color: var(--blue); font-size: .74rem; font-weight: 800;
+        letter-spacing: .16em; text-transform: uppercase; margin-bottom: .6rem;
     }
-    .subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.5rem; }
+    .subtitle { color: var(--muted); font-size: 1.08rem; margin-bottom: 1.8rem; }
     .claim-panel {
-        background: var(--panel); border: 1px solid var(--line);
-        border-radius: 12px; padding: 1.25rem 1.4rem; margin: 1rem 0 1.5rem;
+        background: var(--panel); border: 1px solid rgba(255, 255, 255, .9);
+        border-radius: 20px; padding: 1.35rem 1.5rem; margin: 1.1rem 0 1.7rem;
+        box-shadow: 0 14px 35px rgba(31, 41, 75, .07);
+        backdrop-filter: blur(12px);
     }
     .claim-label {
         color: var(--muted); font-size: .75rem; font-weight: 700;
         letter-spacing: .08em; text-transform: uppercase;
     }
-    .claim-value { color: var(--ink); font-size: 1.45rem; font-weight: 700; margin-top: .25rem; }
+    .claim-value { color: var(--ink); font-size: 1.55rem; font-weight: 750; margin-top: .25rem; }
     .section-label {
         color: var(--muted); font-size: .78rem; font-weight: 700;
         letter-spacing: .1em; text-transform: uppercase; margin: 1.5rem 0 .7rem;
     }
     .step-card {
-        border: 1px solid var(--line); border-radius: 10px;
-        padding: 1rem 1.1rem; margin: .65rem 0; background: #fff;
+        border: 1px solid rgba(255, 255, 255, .9); border-radius: 16px;
+        padding: 1.05rem 1.2rem; margin: .7rem 0; background: var(--panel);
+        box-shadow: 0 8px 25px rgba(31, 41, 75, .055);
+        backdrop-filter: blur(10px);
     }
     .step-title { color: var(--ink); font-weight: 700; font-size: 1rem; }
     .step-summary { color: #3e4b5f; margin-top: .35rem; }
     .step-why { color: var(--muted); font-size: .85rem; margin-top: .6rem; }
     .verdict {
-        border: 2px solid #1d4ed8; border-radius: 12px;
-        padding: 1.25rem 1.4rem; background: #eff6ff; margin-top: 1rem;
+        border: 1px solid rgba(49, 88, 216, .28); border-radius: 18px;
+        padding: 1.4rem 1.5rem; background: linear-gradient(135deg, rgba(239, 246, 255, .9), rgba(245, 243, 255, .9));
+        margin-top: 1.1rem; box-shadow: 0 12px 30px rgba(49, 88, 216, .10);
     }
     .verdict-label {
         color: #1e40af; font-size: .75rem; font-weight: 700;
@@ -61,7 +74,22 @@ st.markdown(
     }
     .verdict-value { color: #172033; font-size: 1.55rem; font-weight: 750; margin: .25rem 0; }
     .stButton > button {
-        border-radius: 8px; font-weight: 650; min-height: 2.7rem;
+        border: 0; border-radius: 12px; font-weight: 700; min-height: 2.9rem;
+        box-shadow: 0 8px 18px rgba(49, 88, 216, .16);
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(49, 88, 216, .22);
+    }
+    [data-testid="stMetric"] {
+        background: rgba(255, 255, 255, .72); border: 1px solid var(--line);
+        border-radius: 14px; padding: .8rem 1rem;
+        box-shadow: 0 8px 22px rgba(31, 41, 75, .05);
+    }
+    [data-testid="stSidebar"] {
+        background: rgba(249, 250, 255, .88);
+        border-right: 1px solid rgba(148, 163, 184, .16);
     }
     </style>
     """,
@@ -84,7 +112,7 @@ def step_card(icon, title, summary, rationale):
     )
 
 
-st.markdown("<div class='eyebrow'>Evidence review system · v1.0</div>", unsafe_allow_html=True)
+st.markdown("<div class='eyebrow'>ProofPath / evidence review system</div>", unsafe_allow_html=True)
 st.title("ProofPath AI")
 st.markdown(
     "<div class='subtitle'>A transparent review agent for machine-learning performance claims.</div>",
