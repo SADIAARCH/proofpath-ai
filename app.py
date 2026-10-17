@@ -49,11 +49,21 @@ st.markdown(
     }
     .hero-copy { flex: 1; }
     .hero-mark {
-        width: 82px; height: 82px; flex: 0 0 82px; display: grid; place-items: center;
-        border-radius: 24px; color: #12668d; font-size: 2.35rem; font-weight: 800;
+        width: 112px; height: 112px; flex: 0 0 112px; display: grid; place-items: center;
+        position: relative; border-radius: 50%; color: #12668d; font-size: 2.35rem; font-weight: 800;
         background: rgba(255, 255, 255, .70);
         border: 1px solid rgba(255, 255, 255, .9);
         box-shadow: inset 0 -8px 18px rgba(114, 201, 236, .22);
+    }
+    .hero-mark::before, .hero-mark::after {
+        content: ""; position: absolute; border: 1px solid rgba(22, 130, 181, .32);
+        border-radius: 50%; animation: radar-pulse 3s ease-out infinite;
+    }
+    .hero-mark::before { inset: -12px; }
+    .hero-mark::after { inset: -24px; animation-delay: 1.1s; }
+    @keyframes radar-pulse {
+        0% { opacity: .7; transform: scale(.86); }
+        75%, 100% { opacity: 0; transform: scale(1.14); }
     }
     .hero-kicker {
         color: #12668d; font-size: .72rem; font-weight: 800;
@@ -83,6 +93,17 @@ st.markdown(
     .flow-kicker { color: #1682b5; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
     .flow-title { color: var(--ink); font-size: .92rem; font-weight: 750; margin-top: .2rem; }
     .flow-copy { color: var(--muted); font-size: .78rem; margin-top: .15rem; }
+    .signal {
+        display: inline-flex; align-items: center; gap: .4rem; color: #167b9f;
+        background: rgba(255, 255, 255, .58); border: 1px solid rgba(22, 130, 181, .17);
+        border-radius: 999px; padding: .3rem .65rem; font-size: .7rem; font-weight: 800;
+        letter-spacing: .06em; text-transform: uppercase;
+    }
+    .signal-dot {
+        width: .45rem; height: .45rem; border-radius: 50%; background: #f0b429;
+        box-shadow: 0 0 0 4px rgba(240, 180, 41, .14); animation: signal-blink 1.6s ease-in-out infinite;
+    }
+    @keyframes signal-blink { 50% { opacity: .35; transform: scale(.78); } }
     .sidebar-brand {
         padding: .75rem .8rem; margin-bottom: 1rem; border-radius: 14px;
         background: linear-gradient(135deg, #fff4bd, #d9f5ff);
@@ -93,7 +114,7 @@ st.markdown(
     @media (max-width: 720px) {
         h1 { font-size: 2.45rem !important; }
         .hero { padding: 1.25rem; }
-        .hero-mark { width: 62px; height: 62px; flex-basis: 62px; font-size: 1.8rem; }
+        .hero-mark { width: 72px; height: 72px; flex-basis: 72px; font-size: 1.8rem; }
         .flow { grid-template-columns: 1fr; }
         .flow-item:not(:last-child)::after { content: "↓"; right: 1rem; top: auto; bottom: -.65rem; }
     }
@@ -191,6 +212,10 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
+    "<div class='signal'><span class='signal-dot'></span> Evidence engine ready · deterministic checks online</div>",
+    unsafe_allow_html=True,
+)
+st.markdown(
     "<div class='flow'><div class='flow-item'><div class='flow-kicker'>01 · Context</div>"
     "<div class='flow-title'>Bring a claim</div><div class='flow-copy'>A result and its supporting artifacts.</div></div>"
     "<div class='flow-item'><div class='flow-kicker'>02 · Reason</div>"
@@ -246,6 +271,7 @@ if theme == "Night":
         .hero-title, .claim-value, .step-title, .verdict-value, h1, h2, h3 { color: var(--ink); }
         .hero-text, .step-summary { color: #c0d3da; }
         .hero-mark { color: #ffe477; background: rgba(8, 31, 43, .68); border-color: rgba(255, 228, 119, .22); }
+        .hero-mark::before, .hero-mark::after { border-color: rgba(128, 217, 245, .35); }
         .hero-kicker, .flow-kicker, .sidebar-brand-title, .verdict-label { color: #80d9f5; }
         .pill, .flow-item, [data-testid="stMetric"] {
             color: #bcecf8; background: rgba(8, 31, 43, .62);
@@ -253,6 +279,7 @@ if theme == "Night":
         }
         .flow-title { color: var(--ink); }
         .flow-copy, .claim-label, .section-label, .step-why { color: #a6bdc8; }
+        .signal { color: #bcecf8; background: rgba(8, 31, 43, .62); border-color: rgba(114, 201, 236, .22); }
         .claim-panel, .step-card {
             background: rgba(14, 42, 56, .74); border-color: rgba(114, 201, 236, .18);
             box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
