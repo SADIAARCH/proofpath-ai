@@ -65,6 +65,18 @@ st.markdown(
         0% { opacity: .7; transform: scale(.86); }
         75%, 100% { opacity: 0; transform: scale(1.14); }
     }
+    .hero-visual {
+        width: 190px; height: 136px; flex: 0 0 190px; overflow: hidden;
+        position: relative; border-radius: 20px;
+        background: linear-gradient(145deg, rgba(9, 12, 39, .92), rgba(34, 24, 78, .92));
+        border: 1px solid rgba(155, 124, 255, .34);
+        box-shadow: inset 0 0 32px rgba(91, 63, 209, .18), 0 14px 30px rgba(15, 12, 53, .2);
+    }
+    .hero-visual svg { width: 100%; height: 100%; display: block; }
+    .hero-visual .orbit { transform-origin: 95px 68px; animation: orbit-spin 14s linear infinite; }
+    .hero-visual .scan { transform-origin: 95px 68px; animation: scan-spin 4s linear infinite; }
+    @keyframes orbit-spin { to { transform: rotate(360deg); } }
+    @keyframes scan-spin { to { transform: rotate(360deg); } }
     .hero-kicker {
         color: #5532c9; font-size: .72rem; font-weight: 800;
         letter-spacing: .14em; text-transform: uppercase;
@@ -134,6 +146,7 @@ st.markdown(
         h1 { font-size: 2.45rem !important; }
         .hero { padding: 1.25rem; }
         .hero-mark { width: 72px; height: 72px; flex-basis: 72px; font-size: 1.8rem; }
+        .hero-visual { width: 132px; height: 96px; flex-basis: 132px; }
         .flow { grid-template-columns: 1fr; }
         .flow-item:not(:last-child)::after { content: "↓"; right: 1rem; top: auto; bottom: -.65rem; }
     }
@@ -223,7 +236,27 @@ st.markdown(
     "investigate machine-learning performance claims before you trust them.</div>"
     "<div class='pill-row'><span class='pill'>Evidence-first</span>"
     "<span class='pill'>Decider 2B routing</span><span class='pill'>Bedrock-ready</span>"
-    "</div></div><div class='hero-mark'>◈</div></div>",
+    "</div></div><div class='hero-visual' aria-label='Evidence constellation illustration'>"
+    "<svg viewBox='0 0 190 136' role='img' aria-hidden='true'>"
+    "<defs><radialGradient id='core' cx='50%' cy='45%'>"
+    "<stop offset='0%' stop-color='#d9ceff'/><stop offset='45%' stop-color='#9b7cff'/>"
+    "<stop offset='100%' stop-color='#5532c9'/></radialGradient>"
+    "<linearGradient id='beam' x1='0%' y1='0%' x2='100%' y2='100%'>"
+    "<stop offset='0%' stop-color='#83e7ff' stop-opacity='.75'/>"
+    "<stop offset='100%' stop-color='#9b7cff' stop-opacity='0'/>"
+    "</linearGradient></defs>"
+    "<circle cx='22' cy='22' r='1.5' fill='#d9ceff'/><circle cx='160' cy='20' r='1' fill='#83e7ff'/>"
+    "<circle cx='174' cy='101' r='1.5' fill='#d9ceff'/><circle cx='38' cy='112' r='1' fill='#83e7ff'/>"
+    "<g class='orbit' fill='none' stroke='#9b7cff' stroke-opacity='.45'>"
+    "<ellipse cx='95' cy='68' rx='67' ry='28' transform='rotate(-18 95 68)'/>"
+    "<ellipse cx='95' cy='68' rx='49' ry='20' transform='rotate(58 95 68)'/></g>"
+    "<path class='scan' d='M95 68 L165 51 A72 72 0 0 0 145 31 Z' fill='url(#beam)' opacity='.55'/>"
+    "<path d='M95 42 L117 51 L113 83 L95 96 L77 83 L73 51 Z' fill='#101433' stroke='#c1a9ff' stroke-width='1.5'/>"
+    "<path d='M85 68 L92 75 L106 59' fill='none' stroke='#83e7ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/>"
+    "<circle cx='95' cy='68' r='9' fill='url(#core)' opacity='.2'/><circle cx='95' cy='68' r='3.5' fill='#d9ceff'/>"
+    "<g fill='#83e7ff'><circle cx='43' cy='53' r='3'/><circle cx='145' cy='94' r='3'/><circle cx='150' cy='45' r='2.5'/></g>"
+    "<g stroke='#83e7ff' stroke-opacity='.5' stroke-dasharray='2 3'><path d='M43 53 L77 59'/><path d='M113 80 L145 94'/><path d='M117 54 L150 45'/></g>"
+    "</svg></div></div>",
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -253,7 +286,7 @@ with st.sidebar:
         "<div class='sidebar-brand-copy'>Evidence before confidence.</div></div>",
         unsafe_allow_html=True,
     )
-    theme = st.radio("Appearance", ["Day", "Night"], horizontal=True)
+    theme = st.radio("Appearance", ["Day", "Night"], index=1, horizontal=True)
     source = st.radio("Input", ["Demo case", "My own files"])
     strategy = st.selectbox(
         "Decision brain",
