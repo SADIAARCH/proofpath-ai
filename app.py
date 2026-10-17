@@ -18,17 +18,18 @@ st.markdown(
     :root {
         --ink: #172033;
         --muted: #667085;
-        --line: rgba(148, 163, 184, .24);
-        --blue: #3158d8;
-        --violet: #7656d6;
-        --panel: rgba(255, 255, 255, .82);
+        --line: rgba(91, 156, 190, .25);
+        --blue: #1682b5;
+        --sky: #72c9ec;
+        --yellow: #fff4bd;
+        --panel: rgba(255, 255, 255, .84);
     }
     .stApp {
         color: var(--ink);
         background:
-            radial-gradient(circle at 8% 4%, rgba(119, 92, 214, .16), transparent 26rem),
-            radial-gradient(circle at 92% 18%, rgba(49, 88, 216, .13), transparent 25rem),
-            linear-gradient(135deg, #f8faff 0%, #f5f7fc 52%, #fbf9ff 100%);
+            radial-gradient(circle at 8% 4%, rgba(255, 226, 103, .34), transparent 26rem),
+            radial-gradient(circle at 92% 18%, rgba(114, 201, 236, .32), transparent 25rem),
+            linear-gradient(135deg, #fffdf2 0%, #f4fbff 52%, #fff9d8 100%);
     }
     [data-testid="stHeader"] { background: transparent; }
     .block-container { max-width: 1180px; padding: 2.5rem 2rem 4rem; }
@@ -42,8 +43,9 @@ st.markdown(
     .claim-panel {
         background: var(--panel); border: 1px solid rgba(255, 255, 255, .9);
         border-radius: 20px; padding: 1.35rem 1.5rem; margin: 1.1rem 0 1.7rem;
-        box-shadow: 0 14px 35px rgba(31, 41, 75, .07);
+        box-shadow: 0 14px 35px rgba(31, 87, 112, .08);
         backdrop-filter: blur(12px);
+        border-top: 4px solid var(--sky);
     }
     .claim-label {
         color: var(--muted); font-size: .75rem; font-weight: 700;
@@ -57,38 +59,41 @@ st.markdown(
     .step-card {
         border: 1px solid rgba(255, 255, 255, .9); border-radius: 16px;
         padding: 1.05rem 1.2rem; margin: .7rem 0; background: var(--panel);
-        box-shadow: 0 8px 25px rgba(31, 41, 75, .055);
+        box-shadow: 0 8px 25px rgba(31, 87, 112, .06);
         backdrop-filter: blur(10px);
+        border-left: 4px solid var(--sky);
     }
     .step-title { color: var(--ink); font-weight: 700; font-size: 1rem; }
     .step-summary { color: #3e4b5f; margin-top: .35rem; }
     .step-why { color: var(--muted); font-size: .85rem; margin-top: .6rem; }
     .verdict {
-        border: 1px solid rgba(49, 88, 216, .28); border-radius: 18px;
-        padding: 1.4rem 1.5rem; background: linear-gradient(135deg, rgba(239, 246, 255, .9), rgba(245, 243, 255, .9));
-        margin-top: 1.1rem; box-shadow: 0 12px 30px rgba(49, 88, 216, .10);
+        border: 1px solid rgba(22, 130, 181, .28); border-radius: 18px;
+        padding: 1.4rem 1.5rem; background: linear-gradient(135deg, rgba(255, 249, 211, .94), rgba(225, 247, 255, .94));
+        margin-top: 1.1rem; box-shadow: 0 12px 30px rgba(22, 130, 181, .10);
     }
     .verdict-label {
-        color: #1e40af; font-size: .75rem; font-weight: 700;
+        color: #12668d; font-size: .75rem; font-weight: 700;
         letter-spacing: .1em; text-transform: uppercase;
     }
     .verdict-value { color: #172033; font-size: 1.55rem; font-weight: 750; margin: .25rem 0; }
     .stButton > button {
         border: 0; border-radius: 12px; font-weight: 700; min-height: 2.9rem;
-        box-shadow: 0 8px 18px rgba(49, 88, 216, .16);
+        background: linear-gradient(135deg, #1682b5, #42afd6);
+        color: white;
+        box-shadow: 0 8px 18px rgba(22, 130, 181, .20);
         transition: transform .15s ease, box-shadow .15s ease;
     }
     .stButton > button:hover {
         transform: translateY(-1px);
-        box-shadow: 0 12px 24px rgba(49, 88, 216, .22);
+        box-shadow: 0 12px 24px rgba(22, 130, 181, .28);
     }
     [data-testid="stMetric"] {
-        background: rgba(255, 255, 255, .72); border: 1px solid var(--line);
+        background: rgba(255, 253, 231, .80); border: 1px solid var(--line);
         border-radius: 14px; padding: .8rem 1rem;
-        box-shadow: 0 8px 22px rgba(31, 41, 75, .05);
+        box-shadow: 0 8px 22px rgba(31, 87, 112, .06);
     }
     [data-testid="stSidebar"] {
-        background: rgba(249, 250, 255, .88);
+        background: rgba(255, 252, 226, .90);
         border-right: 1px solid rgba(148, 163, 184, .16);
     }
     </style>
