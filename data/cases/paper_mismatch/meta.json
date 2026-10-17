@@ -1,0 +1,11 @@
+{
+  "name": "paper_mismatch",
+  "expected": "contradicted",
+  "flaw": "paper_check",
+  "claim": {
+    "value": 0.98,
+    "text": "98.0% accuracy",
+    "eval_notes": "",
+    "paper_text": "Our model reaches an accuracy of 91.2% on the held-out test set."
+  }
+}

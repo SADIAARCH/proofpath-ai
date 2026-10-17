@@ -1,0 +1,13 @@
+{
+  "name": "inflated",
+  "expected": "contradicted",
+  "flaw": "recompute_metric",
+  "claim": {
+    "value": 0.95,
+    "text": "95.0% accuracy",
+    "eval_notes": "Stratified 5-fold cross-validation; hyperparameters tuned on a separate validation set.",
+    "paper_text": "",
+    "predictions_path": "data/cases/inflated/preds.csv",
+    "train_path": "data/cases/inflated/train.csv"
+  }
+}

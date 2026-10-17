@@ -1,0 +1,13 @@
+{
+  "name": "tuned_on_test",
+  "expected": "contradicted",
+  "flaw": "eval_method",
+  "claim": {
+    "value": 0.926,
+    "text": "92.6% accuracy",
+    "eval_notes": "Hyperparameters were tuned on the test set, then the best configuration was reported.",
+    "paper_text": "Our model reaches an accuracy of 92.6% on the held-out test set. A majority-class baseline scores far lower and logistic regression is compared with it.",
+    "predictions_path": "data/cases/tuned_on_test/preds.csv",
+    "train_path": "data/cases/tuned_on_test/train.csv"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "imbalance",
+  "expected": "contradicted",
+  "flaw": "class_balance",
+  "claim": {
+    "value": 0.981,
+    "text": "98.1% accuracy",
+    "eval_notes": "Stratified 5-fold cross-validation; hyperparameters tuned on a separate validation set.",
+    "paper_text": "Our model reaches an accuracy of 98.1% on the held-out test set.",
+    "predictions_path": "data/cases/imbalance/preds.csv",
+    "train_path": "data/cases/imbalance/train.csv"
+  }
+}

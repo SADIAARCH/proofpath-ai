@@ -1,0 +1,13 @@
+{
+  "name": "tiny_test",
+  "expected": "insufficient_evidence",
+  "flaw": "sample_size",
+  "claim": {
+    "value": 1.0,
+    "text": "100.0% accuracy",
+    "eval_notes": "Stratified 5-fold cross-validation; hyperparameters tuned on a separate validation set.",
+    "paper_text": "Our model reaches an accuracy of 100.0% on the held-out test set. A majority-class baseline scores far lower and logistic regression is compared with it.",
+    "predictions_path": "data/cases/tiny_test/preds.csv",
+    "train_path": "data/cases/tiny_test/train.csv"
+  }
+}

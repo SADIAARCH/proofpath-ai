@@ -1,0 +1,13 @@
+{
+  "name": "leakage",
+  "expected": "contradicted",
+  "flaw": "leakage",
+  "claim": {
+    "value": 0.968,
+    "text": "96.8% accuracy",
+    "eval_notes": "Stratified 5-fold cross-validation; hyperparameters tuned on a separate validation set.",
+    "paper_text": "Our model reaches an accuracy of 96.8% on the held-out test set. A majority-class baseline scores far lower and logistic regression is compared with it.",
+    "predictions_path": "data/cases/leakage/preds.csv",
+    "train_path": "data/cases/leakage/train.csv"
+  }
+}

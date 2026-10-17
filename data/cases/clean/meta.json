@@ -1,0 +1,13 @@
+{
+  "name": "clean",
+  "expected": "supported",
+  "flaw": null,
+  "claim": {
+    "value": 0.892,
+    "text": "89.2% accuracy",
+    "eval_notes": "Stratified 5-fold cross-validation; hyperparameters tuned on a separate validation set.",
+    "paper_text": "Our model reaches an accuracy of 89.2% on the held-out test set. A majority-class baseline scores far lower and logistic regression is compared with it.",
+    "predictions_path": "data/cases/clean/preds.csv",
+    "train_path": "data/cases/clean/train.csv"
+  }
+}
