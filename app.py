@@ -286,13 +286,20 @@ with st.sidebar:
         "<div class='sidebar-brand-copy'>Evidence before confidence.</div></div>",
         unsafe_allow_html=True,
     )
-    theme = st.radio("Appearance", ["Day", "Night"], index=1, horizontal=True)
-    source = st.radio("Input", ["Demo case", "My own files"])
-    strategy = st.selectbox(
-        "Decision brain",
-        ["Strands Decider 2B + Bedrock", "Amazon Bedrock (Nova)",
-         "Adaptive (heuristic)", "Fixed checklist", "Decider 2B"],
-    )
+
+st.markdown("<div class='section-label'>Review setup</div>", unsafe_allow_html=True)
+with st.container(border=True):
+    setup_a, setup_b, setup_c = st.columns(3)
+    with setup_a:
+        theme = st.radio("Appearance", ["Day", "Night"], index=1, horizontal=True)
+    with setup_b:
+        source = st.radio("Input", ["Demo case", "My own files"])
+    with setup_c:
+        strategy = st.selectbox(
+            "Decision brain",
+            ["Strands Decider 2B + Bedrock", "Amazon Bedrock (Nova)",
+             "Adaptive (heuristic)", "Fixed checklist", "Decider 2B"],
+        )
     if strategy == "Strands Decider 2B + Bedrock":
         st.caption("Decider 2B routes the next check; Bedrock explains findings.")
     elif strategy == "Amazon Bedrock (Nova)":
@@ -363,14 +370,17 @@ if source == "Demo case":
     if not metas:
         st.error("Run `python benchmark/make_cases.py` first.")
         st.stop()
-    name = st.sidebar.selectbox("Case", list(metas))
+    name = st.selectbox("Demo case", list(metas))
     claim = Claim.from_case(metas[name], Path(__file__).parent)
 else:
-    value = st.sidebar.slider("Claimed accuracy", 0.50, 1.00, 0.98, 0.001)
-    up_preds = st.sidebar.file_uploader("Predictions CSV (features, y_true, y_pred)", type="csv")
-    up_train = st.sidebar.file_uploader("Training CSV (features, y_true)", type="csv")
-    notes = st.sidebar.text_area("How was it evaluated?")
-    paper = st.sidebar.text_area("Paper excerpt")
+    input_a, input_b = st.columns(2)
+    with input_a:
+        value = st.slider("Claimed accuracy", 0.50, 1.00, 0.98, 0.001)
+        up_preds = st.file_uploader("Predictions CSV (features, y_true, y_pred)", type="csv")
+        up_train = st.file_uploader("Training CSV (features, y_true)", type="csv")
+    with input_b:
+        notes = st.text_area("How was it evaluated?")
+        paper = st.text_area("Paper excerpt")
     tmp = Path(tempfile.mkdtemp())
     paths = {}
     for key, up in (("preds", up_preds), ("train", up_train)):

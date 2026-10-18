@@ -1,14 +1,43 @@
-# ProofPath AI: The Evidence Detective
+# ProofPath AI: Check Whether an AI Accuracy Claim Is Trustworthy
 
-**Amazon hackathon build:** an explainable AI agent that uses Amazon Bedrock
-to route evidence checks while deterministic Python tools make every
-measurement and the final verdict. This separation makes the demo auditable:
-Nova can choose *what to inspect next*, but it cannot invent a result.
+ProofPath AI is a fact-checking application for machine-learning results.
+It checks claims such as:
 
-An agent that, given a claim such as "our model reaches 98% accuracy", decides
-**which piece of evidence to inspect next** instead of judging the claim at once.
-Every evidence tool is deterministic code that reads real artifacts. No tool asks a
-language model whether the claim is true.
+> “Our AI model reaches 98% accuracy.”
+
+It is **not a cancer detector, medical diagnosis system, or treatment
+recommendation tool**. A cancer-detection model could be one example of a
+model whose accuracy claim is reviewed, but ProofPath does not inspect
+patients, diagnose disease, or make clinical decisions.
+
+The application reads a model's prediction data and supporting notes, looks
+for common evaluation problems, and reports whether the claim is:
+
+- **supported** — the supplied evidence passes the core checks;
+- **contradicted** — a serious problem was found; or
+- **insufficient evidence** — the claim may be true, but the evidence is too
+  weak or incomplete.
+
+An explainable agent uses Amazon Bedrock or a local policy to choose **which
+check to run next**. Deterministic Python tools perform every measurement and
+the final verdict, so the language model cannot invent evidence or decide the
+result.
+
+## What it checks
+
+ProofPath can detect:
+
+- accuracy that does not match the released predictions;
+- a model that is no better than always guessing the majority class;
+- a test set that is too small;
+- classes that are mostly misclassified despite a good overall accuracy;
+- test rows that also appear in the training data;
+- hyperparameters tuned on the test set; and
+- a paper or report that gives a different accuracy number.
+
+The project is domain-independent: the labels could represent spam, fraud,
+objects, customer churn, or a medical condition. ProofPath checks the
+**evaluation claim**, not the underlying subject.
 
 ## Setup (Python 3.10+)
 
@@ -16,7 +45,7 @@ language model whether the claim is true.
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python benchmark/make_cases.py      # generates 7 claims with planted flaws
-pytest -q                           # 6 tests
+pytest -q                           # runs the test suite
 python benchmark/run_benchmark.py   # compares deciders
 streamlit run app.py                # demo UI
 ```
@@ -64,6 +93,20 @@ input is missing are listed as *unverified*, never silently skipped.
 
 CSV format: feature columns, plus `y_true` and `y_pred` (predictions file) or `y_true`
 (training file).
+
+## First walkthrough
+
+1. Start the app with `streamlit run app.py`.
+2. Select **Demo case** on the main page.
+3. Try the `imbalance` case and click **Run evidence review**. It should be
+   contradicted because always predicting the majority class already gives
+   almost the claimed accuracy.
+4. Try the `clean` case. Its evidence should be supported.
+5. Try `tiny_test` to see **insufficient evidence**: a perfect result on only
+   40 test rows is not strong enough.
+
+The **decision brain** only chooses the next evidence check. The evidence
+trail and verdict come from the deterministic Python tools.
 
 ## Optional remote decision models
 
